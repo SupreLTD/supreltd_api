@@ -5,8 +5,13 @@ from fastapi_users.db import SQLAlchemyBaseUserTableUUID
 from sqlalchemy import String, Boolean, TIMESTAMP
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import DeclarativeBase
 
-from src.models import Base
+
+class Base(DeclarativeBase):
+    pass
+
+# from src.models import Base
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
