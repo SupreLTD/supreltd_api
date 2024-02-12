@@ -4,10 +4,13 @@ from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, UUIDIDMixin
 
-from db.models import User
-from db.sessions import get_user_db
 
-SECRET = "SECRET"
+from src.database import get_db
+
+from .models import User
+from src.config import settings
+
+SECRET = settings.JWT_SECRET
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
@@ -28,5 +31,5 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         print(f"Verification requested for user {user.id}. Verification token: {token}")
 
 
-async def get_user_manager(user_db=Depends(get_user_db)):
+async def get_user_manager(user_db=Depends(get_db)):
     yield UserManager(user_db)
