@@ -14,9 +14,4 @@ class Config(BaseSettings):
     APP_VERSION: str = "1"
 
 
-
-
-
-
-
 settings = Config()
